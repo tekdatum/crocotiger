@@ -1,0 +1,14 @@
+build/
+dist/
+*.egg-info/
+__pycache__/
+docs/examples/offline_builds/
+docs/examples/datasets/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+pytest.xml
+.venv/

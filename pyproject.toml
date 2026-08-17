@@ -1,0 +1,87 @@
+[project]
+name = "crocotiger"
+version = "0.1.0"
+description = "Public SDK for the crocotiger sentence-level prompt guardrail — LangChain and LlamaIndex framework adapters. Requires the proprietary crocotiger-engine package (private, installed separately — see BUILD.md/README.md)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+]
+authors = [
+    {name = "TekDatum", email = "hello@tekdatum.com"},
+]
+# crocotiger-engine is a hard runtime dependency (SentenceValidatorMiddleware/
+# SentenceValidatorLLMGuard both wrap a SentenceValidator from that package),
+# but it can't be listed here — it's not on public PyPI and isn't resolvable
+# via a plain pip dependency yet. Install it manually first; see README.md.
+dependencies = []
+
+[project.optional-dependencies]
+langchain = ["langchain==1.3.11", "langchain-core>=1.4.8", "langgraph==1.2.7"]
+llamaindex = ["llama-index-core==0.14.23"]
+# Also requires crocotiger-engine installed manually (see README.md) — the
+# tests import the real SentenceValidator/SentenceValidatorResult classes.
+test = ["pytest", "pytest-asyncio"]
+dev = ["pytest", "pytest-asyncio", "ruff>=0.4", "mypy>=1.10"]
+
+[project.urls]
+Homepage        = "https://tekdatum.com/products/"
+Source          = "https://github.com/tekdatum/crocotiger"
+Documentation   = "https://github.com/tekdatum/crocotiger/blob/main/docs/concepts.md"
+"Issue Tracker" = "https://github.com/tekdatum/crocotiger/issues"
+Changelog       = "https://github.com/tekdatum/crocotiger/blob/main/CHANGELOG.md"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"crocotiger" = ["py.typed"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths  = ["tests"]
+pythonpath = ["src"]
+addopts    = "-ra -q"
+
+# ── Ruff ─────────────────────────────────────────────────────────────────────
+
+[tool.ruff]
+line-length    = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style  = "double"
+indent-style = "space"
+
+# ── Mypy ─────────────────────────────────────────────────────────────────────
+
+[tool.mypy]
+
+[[tool.mypy.overrides]]
+module = ["crocotiger_engine", "crocotiger_engine.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["langchain", "langchain.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["langchain_core", "langchain_core.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["langgraph", "langgraph.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["llama_index", "llama_index.*"]
+ignore_missing_imports = true
