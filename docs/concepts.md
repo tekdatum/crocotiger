@@ -49,8 +49,6 @@ else:
 | `within_denied_threshold` | `False` | Close enough to the reject list to block. |
 | `outside_semantic_fence` | `False` | Neither — an ambiguous case, treated as not valid. |
 
-`reason_code` is the full explanation surface — the result doesn't expose the underlying nearest-neighbor matches or scores that produced it, since that detail isn't meaningful outside deep_firewall's own product.
-
 ## Optimization strategies
 
 `build_sentence_validator()` auto-tunes the accept/reject thresholds according to an `OptimizationStrategy`:

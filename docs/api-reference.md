@@ -118,12 +118,6 @@ class SentenceValidatorResult:
 | `"within_denied_threshold"` | `False` | Text scored inside the reject list's fitted threshold. |
 | `"outside_semantic_fence"` | `False` | Text scored in neither region — the default, ambiguous case. |
 
-This is a deliberately trimmed view of the underlying engine's result — it
-also computes per-call diagnostic detail (nearest matching list entries,
-internal classification), which isn't exposed here since it's only
-meaningful inside deep_firewall's own product, not for a generic
-topic-guardrail use case.
-
 ### Example
 
 ```python
