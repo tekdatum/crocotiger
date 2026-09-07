@@ -1,9 +1,10 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from crocotiger.integrations.llamaindex import SentenceValidatorLLMGuard
 from crocotiger_engine import SentenceValidator, SentenceValidatorResult
 from llama_index.core.llms import MockLLM
+
+from crocotiger.integrations.llamaindex import SentenceValidatorLLMGuard
 
 
 def _result(valid: bool) -> SentenceValidatorResult:

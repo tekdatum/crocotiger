@@ -1,9 +1,10 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from crocotiger.integrations.langchain import SentenceValidatorMiddleware
 from crocotiger_engine import SentenceValidator, SentenceValidatorResult
 from langchain_core.messages import AIMessage, HumanMessage
+
+from crocotiger.integrations.langchain import SentenceValidatorMiddleware
 
 
 def _result(valid: bool) -> SentenceValidatorResult:
