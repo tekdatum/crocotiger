@@ -68,17 +68,16 @@ def build_sentence_validator(
     deepseek_key: str | None = None,
     datasets_path: str | Path | None = None,
     topic_batch_size: int | None = None,
-    use_cache: bool = True,
-    with_benchmarks: bool = False,
-    overwrite: bool = False,
-    on_phase: Callable[[str], None] | None = None,
+    run_benchmarks: bool = False,
+    allow_rebuild: bool = False,
+    progress_callback: Callable[[str], None] | None = None,
 ) -> SentenceValidator: ...
 ```
 
 - `topic`/`context` describe what should be **allowed**; `restricted_topics` lists what should be **rejected**. Both feed the LLM-generated question corpus.
 - Needs one LLM API key (`openai_key`/`gemini_key`/`deepseek_key`, or the matching `OPENAI_API_KEY`/`GEMINI_API_KEY`/`DEEPSEEK_API_KEY` env var) and, on first use, downloads a dataset corpus to `datasets_path`.
 - Raises `GuardrailBuildError` if the build cannot complete (e.g. no usable API key, corpus download failure).
-- `on_phase` is an optional callback invoked with a phase name string as the build progresses (corpus generation, embedding, threshold fitting, etc.) — useful for progress logging on a build that can take minutes.
+- `progress_callback` is an optional callback invoked with a phase name string as the build progresses (corpus generation, embedding, threshold fitting, etc.) — useful for progress logging on a build that can take minutes.
 - Persists the built validator under `output_dir` as a side effect; the return value is the same instance already saved to disk.
 
 ### Example

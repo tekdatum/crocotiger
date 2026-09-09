@@ -1,6 +1,6 @@
 [project]
 name = "crocotiger"
-version = "0.1.0"
+version = "0.1.1"
 description = "Public SDK for the crocotiger sentence-level prompt guardrail — LangChain and LlamaIndex framework adapters. Requires the proprietary crocotiger-engine package (private, installed separately — see BUILD.md/README.md)."
 readme = "README.md"
 requires-python = ">=3.11"
